@@ -1,33 +1,53 @@
 <head>
 </head>
 <body>
-    <div id='main-container'>
+    <div id="main-container">
         <center>
             <div><label>안녕하세요</label></div>
-            <div><p id='name'>임재희</p></div>
-            <div><input type='text' id='input'></div>
-            <div><button onclick='refresh()'>ok</button></div>
+            <div><p id="name">임재희</p></div>
+            <div><input type="text" id="input"></div>
+            <div><button onclick="refresh()">ok</button></div>
             <br>
-            <div><input type='text' id='input_board'><button onclick='new_board()'>Enter</button></div>
-            <div style='width: 50%;'>
-                <ul id='boards'></ul>
+            <div><input type="text" id="input_board"><button onclick="new_board()">Enter</button></div>
+            <div style="width: 50%;">
+                <ul id="boards"></ul>
             </div>
         </center>
     </div>
     
 </body>
 <script>
+    fetch("http://localhost:3000/boards")
+        .then((res) => res.json())
+        .then((data) => {
+            for (let i=0; i<data["boards"].length; i++) {
+                const board = data["boards"][i];
+                const li = document.createElement("li");
+                li.setAttribute("id", board);
+
+                const text_node = document.createTextNode(board);
+                li.appendChild(text_node);
+                
+                document.getElementById("boards").appendChild(li);
+            }
+        });
+
     refresh = () => {
-        document.getElementById('name').innerText = document.getElementById('input').value;
-    }
+        document.getElementById("name").innerText = document.getElementById("input").value;
+    };
+
     new_board = () => {
-        const board = document.getElementById('input_board').value;
-        const li = document.createElement('li');
-        li.setAttribute('id', board);
-        
-        const text_node = document.createTextNode(board);
-        li.appendChild(text_node);
-        
-        document.getElementById('boards').appendChild(li);
-    }
+        fetch("http://localhost:3000/boards", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "board": document.getElementById('input_board').value
+            }),
+        }).then((res) => {
+            alert(document.getElementById('input_board').value);
+            window.location.reload()
+        });
+    };
 </script> 
