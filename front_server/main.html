@@ -17,7 +17,7 @@
     
 </body>
 <script>
-    fetch("http://localhost:3000/boards")
+    fetch("http://52.78.213.56:3000/boards")
         .then((res) => res.json())
         .then((data) => {
             for (let i=0; i<data["boards"].length; i++) {
@@ -37,7 +37,7 @@
     };
 
     new_board = () => {
-        fetch("http://localhost:3000/boards", {
+        fetch("http://52.78.213.56:3000/boards", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
