@@ -1,0 +1,12 @@
+<label>안녕하세요</label><br>
+저는 <p id="name">임재희</p> 입니다. <br><br>
+<input type="text" id="input"><br>
+<button onclick="refresh()">ok</button>
+
+<script>
+    refresh = () => {
+        console.log('refresh');
+        console.log(document.getElementById('name').innerText);
+        document.getElementById("name").innerText = document.getElementById("input").value;
+    }
+</script> 
