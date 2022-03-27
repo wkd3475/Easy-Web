@@ -35,7 +35,7 @@
           <el-dropdown-item>Delete</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <span>Tom</span>
+      <span>Toori</span>
     </el-header>
     
     <el-main>
